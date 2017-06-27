@@ -234,6 +234,170 @@ The usage of the word "and" is reserved.  It should not be used for multiple par
 - (instancetype)initWithWidth:(CGFloat)width andHeight:(CGFloat)height;
 - (instancetype)initWith:(int)width and:(int)height;  // Never do this.
 ```
+Method Signatures
+=================
+Use lower camel case
+--------------------
+
+Good:
+
+```objc
+answerViewController
+```
+
+Bad:
+
+```objc
+answer_view_controller
+```
+
+Start with action
+-----------------
+For methods that represent an action an object takes, start the name with the action.
+
+Good:
+
+```objc
+- (IBAction)showDetailViewController:(id)sender
+```
+
+Bad:
+
+```objc
+- (void)detailButtonTapped:(id)sender
+```
+
+Getters
+-------
+If the method returns an attribute of the receiver, name the method after the attribute.  The use of "get" is unnecessary, unless one or more values are returned via indirection.
+
+Good:
+
+```objc
+- (NSInteger)age
+```
+
+Bad:
+
+```objc
+- (NSInteger)calcAge
+- (NSInteger)getAge
+```
+
+Return Type Spacing
+-------------------
+For consistency method definitions should have a space between the + or - (scope) and the return type (matching Apple's style).
+
+Good:
+
+```objc
+- (int)age
+```
+
+Bad:
+
+```objc
+-(int)age
+-(int) age
+```
+
+Parameter Keywords
+------------------
+Use keywords before all parameters.
+
+Good:
+
+```objc
+- (void)sendAction:(SEL)aSelector to:(id)anObject forAllCells:(BOOL)flag;
+```
+
+Bad:
+
+```objc
+- (void)sendAction:(SEL)aSelector :(id)anObject :(BOOL)flag;
+```
+
+Be Descriptive
+--------------
+Make the word before the argument describe the argument.
+
+Good:
+
+```objc
+- (id)viewWithTag:(NSInteger)tag;
+```
+
+Bad:
+
+```objc
+- (id)taggedView:(NSInteger)tag;
+``` 
+    
+**Note: this is a poor example because in general tags are an antipattern and should be avoided if at all possible**.
+
+Avoid And (With Exceptions)
+---------------------------
+Do not use "and" to link keywords that are attributes of the receiver.
+
+Good:
+
+```objc
+- (NSInteger)runModalForDirectory:(NSString *)path file:(NSString *)name types:(NSArray *)fileTypes;
+```
+
+Bad:
+
+```objc
+- (NSInteger)runModalForDirectory:(NSString *)path andFile:(NSString *)name andTypes:(NSArray *)fileTypes;
+```
+
+**Exception:** if the method describes *two separate actions*, use "and" to link them:
+
+```objc
+- (BOOL)openFile:(NSString *)fullPath withApplication:(NSString *)appName andDeactivate:(BOOL)flag;
+```
+
+Signature Spacing
+---------------
+Method parameters should not have a space between the keyword and the parameter.
+
+Good:
+
+```objc
+- (void)setExample:(NSString *)text;
+```
+
+
+Bad:
+
+```objc
+- (void)setExample: (NSString *)text;
+- (void)setExample:(NSString *) text;
+```
+
+Init Methods
+---------------
+Init methods should return `instancetype` instead of `id`. Generally this is the one place ivars should be used instead of properties because the class may be in an inconsistent state until it is fully initialized.
+
+```objc
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    // ...
+  }
+  return self;
+}
+```
+
+Dealloc Methods
+---------------
+Dealloc methods are no longer required when using arc but in certain cases must be used to remove observers, KVO, etc.
+
+```objc
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+```
 
 ## Variables
 
