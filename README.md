@@ -24,6 +24,7 @@ This style guide outlines the coding conventions to be followed for iOS projects
     * [Be Descriptive](#be-descriptive)
     * [Avoid And (With Exceptions)](#avoid-and-with-exceptions)
     * [Signature Spacing](#signature-spacing)
+* [Brackets](#Brackets)
 * [Variables](#variables)
 * [Property Attributes](#property-attributes)
 * [Dot-Notation Syntax](#dot-notation-syntax)
@@ -405,6 +406,46 @@ Dealloc methods are no longer required when using arc but in certain cases must 
 ```objc
 - (void)dealloc{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+```
+
+Brackets
+========
+Method brackets should be at the end of the line, preceded by a single space
+
+Good:
+
+```objc
+- (void)checkCondition {
+    if (foo) {
+       NSLog(@"Woof!");
+    } else {
+       NSLog(@"Meow!");
+    }
+}
+```
+
+Prevents Bugs:
+
+```objc
+if (foo) {
+   NSLog(@"Moof!");
+}
+```
+
+Exception for Condition Checking:
+
+```objc
+if (condition) return;
+```
+
+Note: Apple's templates sometimes have the opening bracket on a new line flush left, but generally at the end of the line.
+
+```objc
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    static NSString *CellIdentifier = @"RootViewControllerCellIdentifier";
+    ....
 }
 ```
 
